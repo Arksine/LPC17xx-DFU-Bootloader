@@ -67,10 +67,10 @@ void setleds(int leds)
 	GPIO_write(LED5, leds & 16);
 }
 
-int dfu_btn_pressed(void)
+/*int dfu_btn_pressed(void)
 {
 	return GPIO_get(DFU_BTN);
-}
+}*/
 
 void start_dfu(void)
 {
@@ -185,7 +185,7 @@ int main(void)
 {
 	WDT_Feed();
 
-	GPIO_init(DFU_BTN); GPIO_input(DFU_BTN);
+	//GPIO_init(DFU_BTN); GPIO_input(DFU_BTN);
 
 	GPIO_init(LED1); GPIO_output(LED1);
 	GPIO_init(LED2); GPIO_output(LED2);
@@ -213,12 +213,12 @@ int main(void)
 		check_sd_firmware();
 
 	int dfu = 0;
-	if (dfu_btn_pressed() == 0)
+	/*if (dfu_btn_pressed() == 0)
 	{
 		printf("ISP button pressed, entering DFU mode\n");
 		dfu = 1;
-	}
-	else if (WDT_ReadTimeOutFlag()) {
+	}*/
+	if (WDT_ReadTimeOutFlag()) {
 		WDT_ClrTimeOutFlag();
 		printf("WATCHDOG reset, entering DFU mode\n");
 		dfu = 1;
